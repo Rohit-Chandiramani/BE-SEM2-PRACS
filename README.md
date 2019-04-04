@@ -5,5 +5,7 @@ Till now implemented
 ICS:-  
 Diffie Hellman  
 RSA(only on single number input. Have to update for stream of binary input)  
-S-DES
+S-DES      
+ML:-  
+Linear Regression(Formula based and with Gradient Descent)
 
