@@ -9,5 +9,6 @@ S-DES
 ML:-  
 Linear Regression(Formula based and with Gradient Descent)  
 Decision Tree  
-KNN(normal using max count and weighted KNN classification)
+KNN(normal using max count and weighted KNN classification)  
+K-Means
 
