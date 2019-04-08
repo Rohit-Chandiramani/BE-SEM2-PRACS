@@ -1,7 +1,7 @@
 import numpy as np
 import math
 import matplotlib.pyplot as plt
-
+from sklearn.cluster import KMeans
 
 
 def visulaize_clusters(c1,c2,g1,g2):
@@ -98,3 +98,15 @@ print('Final Centroids ',final_centroids)
 
 trailpoint=points[5]   #point 6 as per assignment
 print('Predicted point lies in ',predict(trailpoint))
+
+
+
+
+
+#using inbuilt sklearn Classifier
+X =[[0.1,0.6],[0.15,0.71],[0.08,0.9],[0.16,0.85],[0.2,0.3],[0.25,0.5],[0.24,0.1],[0.3,0.2]]
+model = KMeans(n_clusters=2, random_state=0)
+model.fit(X)
+print('The centroids as per inbuilt algo ',model.cluster_centers_)
+print('Predicted point as per inbuilt algo lies in cluster',int(list(model.predict([[0.25, 0.5]]))[0])+1   #adding 1 to ouput as default
+                                                                                                            #starting cluster index is 0
