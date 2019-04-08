@@ -1,5 +1,7 @@
 import numpy as np
 import math
+import pandas as pd
+from sklearn.neighbors import KNeighborsClassifier
 
 
 def getdistance(point,p):
@@ -78,3 +80,13 @@ datapoints={(2,4):1,(4,6):1,(4,2):1,(6,4):1,(4,4):2,(6,2):2}
 newpoint=(6,6)
 
 knn(datapoints,newpoint,3)
+X=pd.DataFrame({'X1':[2,4,4,6,4,6],'X2':[4,6,2,4,4,2]})   #taking x,y co-ordiantes as seperate features
+#print(X)
+#X=np.array(X).reshape(np.array(X).shape[0],1)
+y=[1,1,1,1,2,2]
+
+#using inbuilt sklearn KNeighborsClassifier
+model= KNeighborsClassifier(n_neighbors=3)
+model.fit(X, y)
+print('Output label by inbuilt classfier is ',model.predict(pd.DataFrame({'X1':[6],'X2':[6]})))
+#print(model.predict([[1.1]]))
