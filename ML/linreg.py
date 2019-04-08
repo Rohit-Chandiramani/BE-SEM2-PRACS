@@ -1,6 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
-from sklearn import linear_model
+from sklearn.linear_model import LinearRegression
 from sklearn.metrics import r2_score
 
 
@@ -55,7 +55,7 @@ while True:
         break
     else:
         costold=costnew
-    
+
 ynew=[]
 for i in range(0,8):
     ynew.append(gethofx(w0,w1,nohours[i]))
@@ -102,5 +102,8 @@ print('R squared statistic value is ',rsquared)
 
 
 
-
-    
+#uisng inbuilt classifier from sklearn
+nohours=np.array(nohours).reshape(np.array(nohours).shape[0],1)
+model=LinearRegression()
+model.fit(nohours,risk)
+print('The R squared statistic value using inbuilt classifier is ',model.score(nohours,risk))
