@@ -1,6 +1,10 @@
 import numpy as np
 import pandas as pd
 import math
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.preprocessing import LabelEncoder
+from sklearn.tree import export_graphviz
+import pydotplus
 
 def entropyofoutput(X):
     unique=list(set(X))
@@ -129,3 +133,32 @@ entout=entropyofoutput(y)
 buildtree(entout,{},x,y,[])
 print('The final binary tree is ')
 print(fintree)
+
+print(x.columns)
+
+#using inbuilt classifer from sklearn
+le1=LabelEncoder()
+le2=LabelEncoder()
+le3=LabelEncoder()
+le4=LabelEncoder()
+
+#creating DataFrame of featueres with encoded data
+X=pd.DataFrame({'Age':le1.fit_transform(x.iloc[:,0]),
+'Income':le2.fit_transform(x.iloc[:,1]),
+'Gender':le3.fit_transform(x.iloc[:,2]),
+'Marital Status':le4.fit_transform(x.iloc[:,3])})
+
+model = DecisionTreeClassifier(criterion='entropy',random_state=0)
+
+model.fit(X,y)
+print('Prediction on data point [Age < 21, Income = Low,Gender = Female, Marital Status = Married] is ',
+model.predict(pd.DataFrame({'Age':le1.transform(['<21']),
+'Income':le2.transform(['Low']),
+'Gender':le3.transform(['Female']),
+'Marital Status':le4.transform(['Married'])}))[0])
+
+
+#visualize tree
+dot_data= export_graphviz(model,out_file=None)
+graph = pydotplus.graph_from_dot_data(dot_data)
+graph.write_png('dt.png')
